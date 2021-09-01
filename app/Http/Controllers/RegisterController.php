@@ -17,6 +17,16 @@ class RegisterController extends Controller
 
     public function store()
     {
+        $this->validate(request(),[
+                'name'=>'required',
+                'email'=>'required',
+                'password'=>'required|confirmed',
+
+        ]);
+
+
+
+
         //$user = User::create(request(['name', 'email', Hash::make('password')]));
          User::create([
             'name' => request('name'),
@@ -26,13 +36,5 @@ class RegisterController extends Controller
         
         return redirect()->to('/');
 
-/*
-        return User::create([
-            'name' => $data['name'],
-            'agencia'=>$data['agencia'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-        */
     }
 }
